@@ -1,8 +1,21 @@
 import {createSlice} from "@reduxjs/toolkit";
+import {PaletteMode} from "@mui/material";
 
+export type UserType = {
+    firstName: string
+    lastName: string
+    email: string
+    password: string
+    picturePath: string
+    friends: string[]
+    location: string,
+    occupation: string,
+    viewedProfile: number,
+    impressions: number
+}
 const initialState = {
-    mode: "light",
-    user: null,
+    mode: "light" as PaletteMode,
+    user: {} as UserType,
     token: null,
     posts: []
 }
@@ -19,7 +32,7 @@ export const authSlice = createSlice({
             state.token = action.payload.token;
         },
         setLogout: (state) => {
-            state.user = null;
+            state.user = {} as UserType;
             state.token = null;
         },
         setFriends: (state, action) => {

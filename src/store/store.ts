@@ -6,12 +6,10 @@ import {authReducer} from "../state/slice";
 
 const persistConfig = {key: "root", storage, version: 1};
 
-//const persistedReducer = persistReducer(persistConfig, authReducer);
+const persistedReducer = persistReducer(persistConfig, authReducer);
 
-const persistedReducer = persistReducer<ReturnType<typeof authReducer>>(
-    persistConfig,
-    authReducer
-)
+export type PersistedReducerType = ReturnType<typeof persistedReducer>;
+export type AppDispatch = typeof store.dispatch;
 
 const store: Store<any> = configureStore({
     reducer: persistedReducer,
