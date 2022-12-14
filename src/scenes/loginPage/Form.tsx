@@ -1,12 +1,14 @@
 import React, {useState} from 'react';
 import * as yup from "yup";
 import {UserType} from "../../state/slice";
-import {Box, TextField, useMediaQuery, useTheme} from "@mui/material";
+import {Box, TextField, Typography, useMediaQuery, useTheme} from "@mui/material";
 import {useAppDispatch} from "../../hooks/hooks";
 import {useNavigate} from "react-router-dom";
 import {Formik, withFormik, FormikProps, FormikErrors, Field} from "formik";
 import Dropzone, {useDropzone} from "react-dropzone";
 import {ThemeType} from "../../theme";
+import FlexBetween from "../../components/FlexBetween";
+import {EditOutlined} from "@mui/icons-material";
 
 const registerSchema = yup.object().shape({
     firstName: yup.string().required("required"),
@@ -122,11 +124,25 @@ const Form: React.FC<AllValuesType> = ({password, email}) => {
                                     sx={{gridColumn: "span 4"}}
                                 />
                                 <Box gridColumn={"span 4"} border={`1px solid ${palette.neutral.medium}`}>
-                                    <Dropzone accept={".jpg,.jpeg,.png"} multiple={false}
-                                              onDrop={(acceptedFiles, fileRejections, event) => {
-                                                  setFieldValue("picture", acceptedFiles[0])
-                                              }}>
 
+                                    <Dropzone acceptedFile={".jpg,.jpeg,.png"} multiple={false}
+                                              onDrop={(acceptedFile) => {
+                                                  setFieldValue("picture", acceptedFile[0])
+                                              }}>
+                                        {({getRootProps, getInputProps}) => (
+                                            <Box {...getRootProps()} border={`2px dashed ${palette.primary.main}`}
+                                                 p={"1rem"} sx={{"&:hover": {cursor: "pointer"}}}>
+                                                <input {...getInputProps()}/>
+                                                {!values.picture?(
+                                                    <p>Add picture here!</p>
+                                                ):(<FlexBetween>
+                                                    <Typography>
+                                                        {values.picture.name}
+                                                    </Typography>
+                                                    <EditOutlined/>
+                                                </FlexBetween>)}
+                                            </Box>
+                                        )}
                                     </Dropzone>
                                 </Box>
                             </>
