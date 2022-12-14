@@ -6,7 +6,7 @@ export type UserType = {
     lastName: string
     email: string
     password: string
-    picturePath: string
+    picture: string
     friends: string[]
     location: string,
     occupation: string,
