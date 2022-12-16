@@ -3,6 +3,8 @@ import {Box, Typography, useMediaQuery, useTheme} from "@mui/material";
 import {useNavigate} from "react-router-dom";
 import {ThemeType} from "../../theme";
 
+import FormComponent from "./FormComponent";
+
 const LoginPage = () => {
     const theme: ThemeType = useTheme()
     const navigate = useNavigate();
@@ -17,7 +19,8 @@ const LoginPage = () => {
             <Box sx={{backgroundColor: theme.palette.background.alt}} width={isNoneMobileScreens ? "50%" : "93%"}
                  p={"2rem"} m={"2rem auto"} borderRadius={"1.5rem"}>
                 <Typography fontWeight={"500"} variant={"h5"} sx={{mb: "1.5rem"}}>
-                    Welcome welcome
+
+                    <FormComponent/>
                 </Typography>
             </Box>
         </Box>
